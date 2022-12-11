@@ -1,4 +1,4 @@
-# philosophers
+# Philosophers
 Introduction to multithreading
 
 ## Description
