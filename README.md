@@ -44,6 +44,8 @@ Example:
 
 [POSIX Threads Programming, Blaise Barney](https://hpc-tutorials.llnl.gov/posix/)  
 
+[Les threads](https://cours.polymtl.ca/inf2610/documentation/notes/chap4.pdf)
+
 [Creating and joining threads (video)](https://www.youtube.com/watch?v=uA8X5zNOGw8)  
 
 [Passing data to and from threads (video)](https://www.youtube.com/watch?v=It0OFCbbTJE)  
