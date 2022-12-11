@@ -4,11 +4,11 @@ Introduction to multithreading
 ## Description
 A C solution to the dining philosophers problem, serving as an introduction to thread programming.  
 The particular constraints of the project (aside from the original problem's) are:
---- Philosophers may not communicate with each other;
---- Philosophers don't know when another is about to die;
---- The death timer is reset *at the beginning of eating*
---- When philosophers change state, an update with the current time in ms is outputted and lines may not be scrambled between philosophers;
---- Not more than a 10 ms delay between a philosopher's death and when this update is printed.
+- Philosophers may not communicate with each other;
+- Philosophers don't know when another is about to die;
+- The death timer is reset *at the beginning of eating*
+- When philosophers change state, an update with the current time in ms is outputted and lines may not be scrambled between philosophers;
+- Not more than a 10 ms delay between a philosopher's death and when this update is printed.
 
 *(see [subject PDF](https://github.com/pperol/philosophers/fr.subject.pdf) for detailed project specifications)*
 
