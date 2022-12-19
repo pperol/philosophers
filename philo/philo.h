@@ -6,7 +6,7 @@
 /*   By: pperol <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:14:53 by pperol            #+#    #+#             */
-/*   Updated: 2022/12/12 13:26:22 by pperol           ###   ########.fr       */
+/*   Updated: 2022/12/13 13:11:00 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ typedef enum {
 
 typedef struct	s_setup
 {
-	size_t	number_of_philosophers;
+	size_t	nbr_of_philosophers;
 	int		time_to_die;
 	int		time_to_eat;
 	int		time_to_sleep;
@@ -147,6 +147,7 @@ typedef struct 	s_tamagotchi
 	size_t	msec_to_eat;
 	size_t	msec_to_sleep;
 	size_t	meal_index;
+	size_t	time_to_live;
 	t_bool	is_satiated;
 	t_bool 	has_taken_a_fork;
 	t_bool 	has_taken_two_forks;
@@ -156,5 +157,11 @@ typedef struct 	s_tamagotchi
 	t_bool	is_sleeping;
 	t_bool	is_alive;
 }	t_tama;
+
+typedef	struct s_datas
+{
+	
+	
+}	t_dashboard;
 
 #endif

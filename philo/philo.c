@@ -6,7 +6,7 @@
 /*   By: pperol <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:15:19 by pperol            #+#    #+#             */
-/*   Updated: 2022/12/12 16:30:05 by pperol           ###   ########.fr       */
+/*   Updated: 2022/12/12 16:51:49 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int ft_first_fork_on_the_table(t_tama tamagotchi)
 
 t_bool	ft_takes_a_first_fork(t_tama tamagotchi)
 {
+	int times_stamp_in_ms;
+
 	if (ft_is_alive(tamagotchi) == "vrai"
 		&& tamagotchi->is_satiated == "faux"
 		&& tamagotchi->is_thinking == "vrai"
@@ -49,6 +51,8 @@ t_bool	ft_takes_a_first_fork(t_tama tamagotchi)
 
 t_bool	ft_takes_a_second_fork(t_tama tamagotchi)
 {
+	int times_stamp_in_ms;
+
 	if (ft_is_alive(tamagotchi) == "vrai"
 		&& tamagotchi->has_taken_two_forks == "faux"
 		&& tamagotchi->has_taken_a_fork == "vrai"
@@ -64,6 +68,8 @@ t_bool	ft_takes_a_second_fork(t_tama tamagotchi)
 
 t_bool	ft_tama_is_eating(t_tama tamagotchi)
 {
+	int times_stamp_in_ms;
+
 	if (ft_is_alive(tamagotchi) == "vrai"
 		&& tamagotchi.has_taken_a_fork == "vrai"
 		&& tamagotchi.has_taken_two_forks == "vrai")
@@ -159,9 +165,21 @@ void	your_turn(void)
 int main(int ac, char *av) 
 {
 	pthread_t	newthread;
+	
 
 	pthread_create(&newthread, NULL, my_turn, NULL); 
 	your_turn();
 	pthread_join(newthread, NULL);
     return (0);
 }
+
+int main(int ac, char *av)
+{
+	if (ac < 2 || ac > 2)
+		ft_error()
+	else
+		ft_init_tamagocthi();
+		// check is_satiated == NULL || <= av[5]
+	return (0);
+}
+	
