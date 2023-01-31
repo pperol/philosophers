@@ -5,181 +5,93 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pperol <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 11:15:19 by pperol            #+#    #+#             */
-/*   Updated: 2022/12/12 16:51:49 by pperol           ###   ########.fr       */
+/*   Created: 2023/01/07 16:40:07 by pperol            #+#    #+#             */
+/*   Updated: 2023/01/31 14:56:33 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-/*
-number_of_philosophers 
-time_to_die 
-time_to_eat 
-time_to_sleep
-number_of_times_each_philosopher_must_eat
-*/
 
-// one thread == one function!!
-
-int ft_first_fork_on_the_table(t_tama tamagotchi)
+void	*routine(void *ptr)
 {
-	t_tama *left_tamagotchi;
-	t_tama *right_tamagotchi;
+	t_philo	*philo;
 
-	left_tamagotchi == tamagotchi[tamagotchi.bib_nbr + 1];
-	right_tamagotchi == tamagotchi[tamagotchi.bib_nbr - 1];
-	if 
-}
-
-t_bool	ft_takes_a_first_fork(t_tama tamagotchi)
-{
-	int times_stamp_in_ms;
-
-	if (ft_is_alive(tamagotchi) == "vrai"
-		&& tamagotchi->is_satiated == "faux"
-		&& tamagotchi->is_thinking == "vrai"
-		&& tamagotchi->has_taken_a_fork == "faux";
-		&& ft_first_fork_is_on_the_table(tamagotchi) == "vrai")
+	philo = (t_philo *)ptr;
+	if (philo->name % 2)
+		usleep(200);
+	if (philo->data->so_lonely)
+		return (eats_alone(philo));
+	while (!dinner_is_over(philo))
 	{
-		tama->has_taken_a_fork == "vrai";
-		printf("%d: %d has taken a first fork\n", 
-			timestamp_in_ms, tama->bib_nbr)
-		return(vrai);
+		eats(philo);
+		if (get_meals(philo) == philo->data->times_must_eat)
+			return (NULL);
+		sleeps(philo);
+		thinks(philo);
 	}
-	return(faux);
+	return (NULL);
 }
 
-t_bool	ft_takes_a_second_fork(t_tama tamagotchi)
+void	*monitor(void *ptr)
 {
-	int times_stamp_in_ms;
+	int		i;
+	long	current_time;
+	long	time_to_die;
+	t_philo	*philos;
 
-	if (ft_is_alive(tamagotchi) == "vrai"
-		&& tamagotchi->has_taken_two_forks == "faux"
-		&& tamagotchi->has_taken_a_fork == "vrai"
-		&& ft_second_fork_is_on_the_table(tamagotchi) == "vrai")
+	philos = (t_philo *)ptr;
+	time_to_die = philos->data->time_to_die;
+	while (!all_philos_ate(philos))
 	{
-		tama->has_taken_two_forks == "vrai";
-		printf("%d: %d has taken a second fork\n", 
-			timestamp_in_ms, tama->bib_nbr)
-		return(vrai);
-	}
-	return(faux);
-}
-
-t_bool	ft_tama_is_eating(t_tama tamagotchi)
-{
-	int times_stamp_in_ms;
-
-	if (ft_is_alive(tamagotchi) == "vrai"
-		&& tamagotchi.has_taken_a_fork == "vrai"
-		&& tamagotchi.has_taken_two_forks == "vrai")
-	{
-		tamagotchi.is_thinking == "faux";
-		tamagotchi.is_eating == "vrai";
-		tamagotchi.is_alive == "vrai";
-		printf("%d: %d is eating\n", timestamp_in_ms, timatama->bib_nbr)
-		//usleep()
-		tamagotchi.has_returned_both_forks == "vrai";
-		return (vrai);
-	}
-	return(faux);
-}
-
-t_bool	ft_tama_is_sleeping(t_tama tamagotchi)
-{
-	int times_stamp_in_ms;
-
-	timestamp_in_ms = gettimeofday();
-	if (ft_is_alive(tamagotchi) == "vrai"
-		&& tamagotchi.has_taken_a_fork == "vrai"
-		&& tamagotchi.has_taken_two_forks == "vrai")
-	{
-		tamagotchi.is_thinking == "faux";
-		tamagotchi.is_eating == "vrai";
-		tamagotchi.is_alive == "vrai";
-		printf("%d: %d is sleeping\n", timestamp_in_ms, tama->bib_nbr)
-		//usleep()
-		tamagotchi.is_thinking == "vrai";
-		return (vrai);
-	}
-	return(faux);
-}
-
-int ft_check_tamagotchis_are_alive(t_tama tamagotchi, int nb_of_tamagotchies)
-{
-	int i;
-	
-	i = 1;
-	while(i <= nb_of_tamagotchies)
-	{
-		while(tamagotchi[i - 1])
+		i = 0;
+		while (i < philos->data->number_of_philos)
 		{
-			if (tamagotchi.is_alive == "vrai")
-			return (1);
+			current_time = timenow(philos->data->firststamp);
+			if ((current_time - get_last_meal(&philos[i])) > time_to_die)
+			{
+				finish_dinner(&philos[i]);
+				print_act(&philos[i], DIED);
+				return (NULL);
+			}
+			i++;
 		}
+		usleep(10000);
+	}
+	return (NULL);
+}
+
+int	philosophers_start(int n, t_philo *philo)
+{
+	int			i;
+	pthread_t	monitor_thread;
+
+	i = 0;
+	philo->data->firststamp = timestamp();
+	while (i < n)
+	{
+		pthread_create(&philo[i].thread, NULL, &routine, &philo[i]);
 		i++;
 	}
+	pthread_create(&monitor_thread, NULL, &monitor, philo);
+	i = 0;
+	while (i < n)
+	{
+		pthread_join(philo[i].thread, NULL);
+		i++;
+	}
+	pthread_join(monitor_thread, NULL);
 	return (0);
 }
-	
-int ft_check_tamagotchis_are_satiated(t_tama tamagotchi, int nb_of_tamagotchies)
-{
-	int i;
-	
-	i = 1;
-	while(i <= nb_of_tamagotchies)
-	{
-		while(tamagotchi[i - 1])
-		{
-			if (tamagotchi.is_satiated == "faux")
-			return (0);
-		}
-		i++;
-	}
-	return (1);
-}
-	
-void	*my_turn(void *arg)
-{
-	int i = 0;
-	while (i < 5)
-	{
-		usleep(100000);
-		printf("My turn!\n");
-		i++;
-	}
-	return(NULL);
-}
 
-void	your_turn(void)
+int	main(int ac, char **av)
 {
-	int i = 0;
-	while (i < 5)
-	{
-		usleep(200000);
-		printf("Your turn...\n");
-		i++;
-	}
-}
+	t_data	data;
+	t_philo	*philos;
 
-int main(int ac, char *av) 
-{
-	pthread_t	newthread;
-	
-
-	pthread_create(&newthread, NULL, my_turn, NULL); 
-	your_turn();
-	pthread_join(newthread, NULL);
-    return (0);
-}
-
-int main(int ac, char *av)
-{
-	if (ac < 2 || ac > 2)
-		ft_error()
-	else
-		ft_init_tamagocthi();
-		// check is_satiated == NULL || <= av[5]
+	init_args(ac, av, &data);
+	init_data(&data);
+	init_philos(data.number_of_philos, &data, &philos);
+	philosophers_start(data.number_of_philos, philos);
+	free(philos);
 	return (0);
 }
-	
