@@ -44,6 +44,8 @@ Example:
 
 [POSIX Threads Programming, Blaise Barney](https://hpc-tutorials.llnl.gov/posix/)  
 
+[Unix threads in C](https://www.youtube.com/watch?v=d9s_d28yJq0&list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2)
+
 [Les threads](https://cours.polymtl.ca/inf2610/documentation/notes/chap4.pdf)
 
 [Creating and joining threads (video)](https://www.youtube.com/watch?v=uA8X5zNOGw8)  
@@ -53,3 +55,5 @@ Example:
 [Thread safety, race conditions, and mutex locks (video)](https://www.youtube.com/watch?v=9axu8CUvOKY)  
 
 [Mutex locks and avoiding deadlock](https://docs.oracle.com/cd/E19455-01/806-5257/sync-12/index.html)
+
+[Philosophers visualizer](https://nafuka11.github.io/philosophers-visualizer/)
