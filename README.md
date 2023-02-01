@@ -31,11 +31,11 @@ Example:
 ## Example
 > when a philosopher dies to a short `time_to_die`
 
-![philosophers dying](https://i.imgur.com/qLyOgXn.png?1)
+![philosophers dying](https://i.imgur.com/UQzm2kT.jpg)
 
 > when the program keeps running
 
-![philosophers not dying](https://i.imgur.com/8phVvOR.png?1)
+![philosophers not dying](https://i.imgur.com/wVWZaSm.jpg)
 
 ## Resources
 [A clear explanation of the dining philosophers problem](https://en.wikipedia.org/wiki/Dining_philosophers_problem)  
