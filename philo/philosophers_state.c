@@ -6,7 +6,7 @@
 /*   By: pperol <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:06:16 by pperol            #+#    #+#             */
-/*   Updated: 2023/01/31 15:03:32 by pperol           ###   ########.fr       */
+/*   Updated: 2023/02/01 17:47:45 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ void	print_act(t_philo *philo, int act)
 	pthread_mutex_lock(&philo->data->lock_print);
 	time = timenow(philo->data->firststamp);
 	if (act == GRAB_FORK && !dinner_is_over(philo))
-		printf("%ld %d %s", time, philo->name, MSG_FORK);
+		printf("%s%5ld %3d %s%s", GRN, time, philo->name, MSG_FORK, RST);
 	else if (act == EATING && !dinner_is_over(philo))
-		printf("%ld %d %s", time, philo->name, MSG_EAT);
+		printf("%s%5ld %3d %s%s", YEL, time, philo->name, MSG_EAT, RST);
 	else if (act == SLEEPING && !dinner_is_over(philo))
-		printf("%ld %d %s", time, philo->name, MSG_SLEEP);
+		printf("%s%5ld %3d %s%s", MAG, time, philo->name, MSG_SLEEP, RST);
 	else if (act == THINKING && !dinner_is_over(philo))
-		printf("%ld %d %s", time, philo->name, MSG_THINK);
+		printf("%5ld %3d %s", time, philo->name, MSG_THINK);
 	else if (act == DIED)
-		printf("%ld %d %s", time, philo->name, MSG_DIED);
+		printf("%s%5ld %3d %s%s", RED, time, philo->name, MSG_DIED, RST);
 	pthread_mutex_unlock(&philo->data->lock_print);
 }
 
