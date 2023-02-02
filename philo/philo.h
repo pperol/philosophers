@@ -6,7 +6,7 @@
 /*   By: pperol <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:14:53 by pperol            #+#    #+#             */
-/*   Updated: 2023/02/01 17:26:29 by pperol           ###   ########.fr       */
+/*   Updated: 2023/02/02 12:51:52 by pperol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@
 
 typedef struct s_data
 {
+	pthread_mutex_t	lock_print;
+	pthread_mutex_t	lock_dinner;
 	long			firststamp;
 	int				so_lonely;
 	int				number_of_philos;
@@ -57,21 +59,19 @@ typedef struct s_data
 	int				time_to_sleep;
 	int				time_to_think;
 	int				times_must_eat;
-	pthread_mutex_t	lock_print;
-	pthread_mutex_t	lock_dinner;
 }	t_data;
 
 typedef struct s_philo
 {
+	pthread_mutex_t	fork_left;
+	pthread_mutex_t	lock_supper;
+	pthread_mutex_t	lock_meals;
 	long			lastsupper;
 	pthread_mutex_t	*fork_right;
 	t_data			*data;
 	int				name;
 	int				meals;
 	pthread_t		thread;
-	pthread_mutex_t	fork_left;
-	pthread_mutex_t	lock_supper;
-	pthread_mutex_t	lock_meals;
 }	t_philo;
 
 /* Utils */
