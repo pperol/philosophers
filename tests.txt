@@ -17,3 +17,4 @@
 — 4 600 200 -5 : should error and not run (no crashing)
 — 4 600 200 200 -5 : should error and not run (no crashing)
 — 0 en parametres, ou "" : should error and not run (no crashing)
+— ulimit -v 2048; ./philo
